@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Gadget Reviews</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-dark text-light">
+
+    <!-- 1. Sticky Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-microchip me-2"></i>TechReviews</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#specs">Specs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#newsletter">Newsletter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. Hero Carousel -->
+    <section id="home">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1200&h=400" class="d-block w-100" alt="Latest Laptops">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>Next-Gen Laptops</h5>
+                        <p>Power and portability combined.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=1200&h=400" class="d-block w-100" alt="Smart Wearables">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>Smart Wearables</h5>
+                        <p>Track your health with style.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&q=80&w=1200&h=400" class="d-block w-100" alt="VR Headsets">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>Immersive VR</h5>
+                        <p>Step into the future of gaming.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </section>
+
+    <!-- 3. Grid of Cards (Reviews) -->
+    <section id="reviews" class="container py-5">
+        <h2 class="text-center mb-4 text-info">Latest Gadget Reviews</h2>
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-md-4">
+                <div class="card bg-secondary text-light h-100 shadow-sm border-0">
+                    <img src="https://images.unsplash.com/photo-1598327773511-e94ff8e47fbe?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Smartphone">
+                    <div class="card-body">
+                        <h5 class="card-title">UltraPhone X</h5>
+                        <p class="card-text">The new UltraPhone X features a stunning OLED display and all-day battery life.</p>
+                        <!-- 6. Progress Bars (inside card) -->
+                        <div class="mb-2">
+                            <small>Battery Life</small>
+                            <div class="progress" style="height: 5px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <small>Camera</small>
+                            <div class="progress" style="height: 5px;">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-info w-100" data-bs-toggle="modal" data-bs-target="#specsModal">View Specs</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col-md-4">
+                <div class="card bg-secondary text-light h-100 shadow-sm border-0">
+                    <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Headphones">
+                    <div class="card-body">
+                        <h5 class="card-title">SoundMax Pro</h5>
+                        <p class="card-text">Noise-cancelling headphones that deliver crystal clear audio in any environment.</p>
+                         <div class="mb-2">
+                            <small>Sound Quality</small>
+                            <div class="progress" style="height: 5px;">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 95%"></div>
+                            </div>
+                        </div>
+                         <div class="mb-3">
+                            <small>Comfort</small>
+                            <div class="progress" style="height: 5px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-info w-100" data-bs-toggle="modal" data-bs-target="#specsModal">View Specs</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-md-4">
+                <div class="card bg-secondary text-light h-100 shadow-sm border-0">
+                    <img src="https://images.unsplash.com/photo-1551645120-d70bfe84c826?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Smartwatch">
+                    <div class="card-body">
+                        <h5 class="card-title">FitWrist 5</h5>
+                        <p class="card-text">A fitness tracker that monitors heart rate, sleep, and steps with precision.</p>
+                         <div class="mb-2">
+                            <small>Accuracy</small>
+                            <div class="progress" style="height: 5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 88%"></div>
+                            </div>
+                        </div>
+                         <div class="mb-3">
+                            <small>Durability</small>
+                            <div class="progress" style="height: 5px;">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-info w-100" data-bs-toggle="modal" data-bs-target="#specsModal">View Specs</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Modal (Detailed Specs) -->
+    <div class="modal fade" id="specsModal" tabindex="-1" aria-labelledby="specsModalLabel" aria-hidden="true">
+        <div class="modal-dialog text-dark">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="specsModalLabel">Detailed Specifications</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Here are the detailed technical specifications for the selected gadget:</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Processor:</strong> Octa-core 3.2GHz</li>
+                        <li class="list-group-item"><strong>RAM:</strong> 16GB LPDDR5</li>
+                        <li class="list-group-item"><strong>Storage:</strong> 512GB SSD</li>
+                        <li class="list-group-item"><strong>Battery:</strong> 5000mAh (24h usage)</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Accordion (FAQ) -->
+    <section id="faq" class="container py-5">
+        <h2 class="text-center mb-4 text-info">Frequently Asked Questions</h2>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item bg-secondary text-light border-light">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button bg-secondary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                        How do you test battery life?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        We run a continuous video playback loop at 50% brightness until the device shuts down.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item bg-secondary text-light border-light">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed bg-secondary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                        Are these reviews sponsored?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        No, all our reviews are independent and unbiased. We buy the products ourselves.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item bg-secondary text-light border-light">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed bg-secondary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                        Can I request a product review?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Yes! Use our contact form or newsletter signup to send us suggestions.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="container py-5 text-center">
+        <button id="toggleNewsletter" class="btn btn-info btn-lg mb-3">Subscribe to Newsletter</button>
+        <div id="newsletterForm" class="p-4 border border-info rounded" style="display: none;">
+            <h3>Stay Updated!</h3>
+            <p>Get the latest gadget news delivered to your inbox.</p>
+            <form class="row justify-content-center">
+                <div class="col-md-6">
+                    <input type="email" class="form-control mb-2" placeholder="Enter your email">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-2">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="btn btn-warning rounded-circle" style="position: fixed; bottom: 20px; right: 20px; display: none; width: 50px; height: 50px;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer class="bg-black text-center py-3 mt-5">
+        <p>&copy; 2026 TechReviews. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>

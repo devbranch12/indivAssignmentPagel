@@ -1,0 +1,54 @@
+/* Custom Dark Mode Styling */
+body {
+    background-color: #121212; /* Very dark grey background */
+    color: #e0e0e0;
+}
+
+/* Navbar overrides */
+.navbar {
+    background-color: #1f1f1f !important;
+}
+
+/* Card overrides for dark theme */
+.card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.card-title {
+    color: #61dafb; /* React-like blue for tech feel */
+}
+
+/* Accordion Overrides */
+.accordion-button {
+    background-color: #2c2c2c;
+    color: #fff;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #383838;
+    color: #61dafb;
+    box-shadow: none;
+}
+
+.accordion-item {
+    border-color: #444;
+}
+
+/* Carousel Caption */
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Newsletter Section */
+#newsletterForm {
+    background-color: #1a1a1a;
+}

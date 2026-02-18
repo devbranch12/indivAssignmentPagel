@@ -1,0 +1,15 @@
+# Assignment Components Documentation
+
+## Bootstrap Components Utilized (Min 6)
+1. **Navbar (Sticky)** - Used for site navigation ([index.html](index.html#L14)).
+2. **Carousel (Hero)** - Featured gadget slider at the top ([index.html](index.html#L31)).
+3. **Cards (Grid)** - Used to display product reviews ([index.html](index.html#L61)).
+4. **Modal** - Popup specifically for "Detailed Specs" ([index.html](index.html#L106)).
+5. **Accordion** - Used for the FAQ section ([index.html](index.html#L125)).
+6. **Progress Bars** - Used within cards to show battery life and ratings ([index.html](index.html#L68)).
+7. **Buttons** - Used for triggers (Modal, Newsletter).
+
+## jQuery Components Utilized (Min 3)
+1. **Smooth Scrolling** - For navigation links to sections within the page ([js/script.js](js/script.js#L4)).
+2. **Back to Top Button** - Fades in/out on scroll and animates scroll to top ([js/script.js](js/script.js#L17)).
+3. **Toggle Effect** - Slide toggle used for hiding/showing the Newsletter Signup form ([js/script.js](js/script.js#L29)).
