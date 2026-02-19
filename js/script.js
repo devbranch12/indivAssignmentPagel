@@ -1,6 +1,6 @@
 $(document).ready(function() {
     
-    // 1. Smooth Scrolling for Navigation Links
+    // 1. Smooth Scrolling for Navigation Links (jQuery Component #1: Animated Scroll Effects)
     $('a.nav-link[href^="#"]').on('click', function(event) {
         if (this.hash !== "") {
             event.preventDefault();
@@ -15,7 +15,7 @@ $(document).ready(function() {
         }
     });
 
-    // 2. Back to Top Button (Fade In/Out)
+    // 2. Back to Top Button (Fade In/Out) (jQuery Component #2: Fade Effect/Toggle)
     $(window).scroll(function() {
         if ($(this).scrollTop() > 300) {
             $('#backToTop').fadeIn();
@@ -29,7 +29,7 @@ $(document).ready(function() {
         return false;
     });
 
-    // 3. Toggle Effect for Newsletter Signup
+    // 3. Toggle Effect for Newsletter Signup (jQuery Component #3: Toggle Elements)
     $('#toggleNewsletter').click(function() {
         $('#newsletterForm').slideToggle('slow');
     });
