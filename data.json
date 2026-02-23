@@ -9,9 +9,9 @@
     },
     {
       "id": 2,
-      "title": "UNAS NSC-200",
-      "content": "Compact DIY NAS chassis perfect for home labs. Features hot-swap bays and Mini-ITX support.",
-      "rating": 4,
+      "title": "UNAS 2 Storage Server",
+      "content": "Review In Progress: Testing a dual-bay DIY NAS build featuring x2 Seagate 4TB IronWolf 5400 RPM drives (ST4000VN006) configured in RAID 1. Initial benchmarks show excellent thermal stability and near-silent operation for home office environments.",
+      "rating": 0,
       "image": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=400&h=250"
     },
     {
