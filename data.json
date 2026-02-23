@@ -1,0 +1,74 @@
+{
+  "reviews": [
+    {
+      "id": 1,
+      "title": "Dell Precision 5680",
+      "content": "A mobile workstation powerhouse with incredible performance and a stunning OLED display.",
+      "rating": 5,
+      "image": "https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&q=80&w=400&h=250"
+    },
+    {
+      "id": 2,
+      "title": "UNAS NSC-200",
+      "content": "Compact DIY NAS chassis perfect for home labs. Features hot-swap bays and Mini-ITX support.",
+      "rating": 4,
+      "image": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=400&h=250"
+    },
+    {
+      "id": 3,
+      "title": "QNAP TS-431K",
+      "content": "Reliable 4-bay NAS for personal cloud and home entertainment.",
+      "rating": 4,
+      "image": "https://images.unsplash.com/photo-1558494949-ef526b0042a0?auto=format&fit=crop&q=80&w=400&h=250"
+    }
+  ],
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Logitech MX Master 3S",
+      "price": "$99.99",
+      "category": "Peripherals",
+      "image": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&q=80&w=400&h=250"
+    },
+    {
+      "id": 2,
+      "name": "Keychron Q1 Pro",
+      "price": "$199.00",
+      "category": "Keyboards",
+      "image": "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=400&h=250"
+    },
+    {
+      "id": 3,
+      "name": "LG UltraGear 27\"",
+      "price": "$349.99",
+      "category": "Monitors",
+      "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=400&h=250"
+    }
+  ],
+  "blog": [
+    {
+      "id": 1,
+      "title": "The Future of AI in Tech",
+      "excerpt": "How artificial intelligence is reshaping the gadgets we use every day.",
+      "content": "How artificial intelligence is reshaping the gadgets we use every day. From smart home devices that learn your routines to smartphones that anticipate your needs, AI is becoming an invisible but essential part of our technological lives. In this post, we explore the latest advancements in AI hardware and what it means for the future of consumer electronics.",
+      "date": "2026-02-20",
+      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=400&h=250"
+    },
+    {
+      "id": 2,
+      "title": "Building Your First Home Lab",
+      "excerpt": "A beginner's guide to setting up a home server and network.",
+      "content": "A beginner's guide to setting up a home server and network. Whether you want to host your own media server, run virtual machines, or just learn more about networking, building a home lab is a rewarding project. We'll walk you through choosing the right hardware, setting up a hypervisor, and configuring your first virtual network.",
+      "date": "2026-02-15",
+      "image": "https://images.unsplash.com/photo-1558494949-ef526b0042a0?auto=format&fit=crop&q=80&w=400&h=250"
+    },
+    {
+      "id": 3,
+      "title": "Mechanical Keyboards 101",
+      "excerpt": "Everything you need to know about switches, keycaps, and layouts.",
+      "content": "Everything you need to know about switches, keycaps, and layouts. The world of mechanical keyboards can be overwhelming for newcomers. What's the difference between linear, tactile, and clicky switches? What are PBT keycaps? In this comprehensive guide, we break down the terminology and help you find the perfect keyboard for your typing style.",
+      "date": "2026-02-10",
+      "image": "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=400&h=250"
+    }
+  ]
+}

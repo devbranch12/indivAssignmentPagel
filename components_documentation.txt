@@ -1,15 +1,21 @@
-# Assignment Components Documentation
+Project Documentation: Tech Gadget Reviews
 
-## Bootstrap Components Utilized (Min 6)
-1. **Navbar (Sticky)** - Used for site navigation ([index.html](index.html#L14)).
-2. **Carousel (Hero)** - Featured gadget slider at the top ([index.html](index.html#L31)).
-3. **Cards (Grid)** - Used to display product reviews ([index.html](index.html#L61)).
-4. **Modal** - Popup specifically for "Detailed Specs" ([index.html](index.html#L106)).
-5. **Accordion** - Used for the FAQ section ([index.html](index.html#L125)).
-6. **Progress Bars** - Used within cards to show battery life and ratings ([index.html](index.html#L68)).
-7. **Buttons** - Used for triggers (Modal, Newsletter).
+1. Mobile-First Design Approach
+--------------------------------
+The project was built using a mobile-first design philosophy. By utilizing Bootstrap 5's responsive grid system (e.g., `col-sm-6`, `col-md-4`, `d-none d-md-block`), the layout naturally stacks elements vertically on smaller screens (like mobile phones) and expands into multi-column layouts on tablets and desktops. The navigation bar collapses into a hamburger menu on smaller screens, ensuring the UI remains clean and accessible. Images and media (like the YouTube iframe) use responsive classes (`img-fluid`, `w-100`, `ratio`) to scale proportionally without breaking the layout.
 
-## jQuery Components Utilized (Min 3)
-1. **Smooth Scrolling** - For navigation links to sections within the page ([js/script.js](js/script.js#L4)).
-2. **Back to Top Button** - Fades in/out on scroll and animates scroll to top ([js/script.js](js/script.js#L17)).
-3. **Toggle Effect** - Slide toggle used for hiding/showing the Newsletter Signup form ([js/script.js](js/script.js#L29)).
+2. Bootstrap Components Used (Minimum 6)
+-----------------------------------------
+1. Navbar: A responsive, sticky-top navigation bar (`navbar`, `navbar-expand-lg`) is used across all pages to provide consistent routing. It collapses into a toggler on mobile devices.
+2. Carousel: Implemented on the Home page (`index.html`) to display featured content. It includes a mix of images and a responsive YouTube video embed using Bootstrap's `ratio` classes.
+3. Cards: Used extensively on the Home and Reviews pages to display catalog items and review summaries. They utilize `card`, `card-body`, and `card-img-top` for structured content presentation.
+4. Modal: Implemented on the Reviews page (`reviews.html`). Clicking "View in Modal" on a review card opens a Bootstrap Modal (`modal`, `modal-dialog`) to display the full review content without leaving the page.
+5. Accordion: Used on the Blog page (`blog.html`) to list blog posts. It allows users to expand and collapse individual posts, saving vertical space on mobile devices.
+6. Forms & Tooltips: The Contact page (`contact.html`) features a structured Bootstrap form (`form-control`, `form-label`). Input fields also utilize Bootstrap Tooltips (`data-bs-toggle="tooltip"`) to provide helpful hints to the user.
+7. Badges & Buttons: Badges (`badge bg-info`) are used to display prices on catalog cards. Various Bootstrap buttons (`btn-info`, `btn-outline-light`) are used for calls to action.
+
+3. jQuery Components & Effects Used (Minimum 3)
+------------------------------------------------
+1. Fade In Elements (Animation): On the Home and Reviews pages, the cards are initially hidden (`display:none`) and then smoothly revealed using jQuery's `.fadeIn(1000)` after the JSON data is fetched and injected into the DOM.
+2. Toggle Elements (Read More/Less): On the Reviews page, a jQuery click event listener is attached to the "Read More" buttons. It uses `.toggle()` and `.slideToggle()` to switch between a short excerpt and the full review text dynamically.
+3. Form Validation: On the Contact page, jQuery intercepts the form submission (`$("#contactForm").submit()`). It iterates through the inputs to check for empty values, dynamically adding Bootstrap's `is-invalid` or `is-valid` classes. If valid, it shows a success message using `.fadeIn()` and resets the form.
