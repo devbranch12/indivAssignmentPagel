@@ -1,4 +1,40 @@
 $(document).ready(function() {
+    // Site Feature Configuration
+    const siteConfig = {
+        enableCatalog: false, // Set to false to hide Catalog page and links
+        enableContact: false  // Set to false to disable Contact page
+    };
+
+    function applySiteConfig() {
+        // 1. Catalog Logic
+        if (!siteConfig.enableCatalog) {
+            // Hide Navbar Link
+            $('a[href="catalog.html"]').closest('li').hide();
+            
+            // Redirect if on catalog page
+            if (window.location.pathname.includes('catalog.html')) {
+                window.location.replace('index.html');
+            }
+
+            // Hide Homepage Featured Catalog Slide (Slide 3 aka index 2)
+            // We remove the indicator and the item
+            $('.carousel-indicators button[data-bs-slide-to="2"]').remove();
+            $('.carousel-item:nth-child(3)').remove();
+        }
+
+        // 2. Contact Logic
+        if (!siteConfig.enableContact) {
+            // Hide Navbar Link
+            $('a[href="contact.html"]').closest('li').hide();
+            
+            // Redirect if on contact page
+            if (window.location.pathname.includes('contact.html')) {
+                window.location.replace('index.html');
+            }
+        }
+    }
+    applySiteConfig();
+
     // Theme Switcher Logic
     const savedTheme = localStorage.getItem('theme') || 'dark';
     $('body').attr('data-theme', savedTheme);
@@ -19,40 +55,57 @@ $(document).ready(function() {
     // Fetch JSON Data
     $.getJSON("data.json", function(data) {
         
-        // 1. Populate Catalog on Home Page
-        if ($("#catalog-container").length) {
-            $.each(data.catalog, function(index, item) {
+        // 1. Populate Featured Content on Home Page (Reviews & Blog)
+        if ($("#featured-container").length) {
+            // Add first 2 reviews
+            $.each(data.reviews.slice(0, 2), function(index, review) {
+                var stars = "";
+                for(var i=0; i<review.rating; i++) { stars += '<i class="fas fa-star text-warning"></i>'; }
+                
                 var card = `
-                    <div class="col-lg-4 col-md-6 col-sm-12" id="catalog-${item.id}">
-                        <div class="card h-100 shadow-sm border-0 item-card" style="display:none;">
-                            <img src="${item.image}" class="card-img-top" alt="${item.name}">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card h-100 shadow-sm border-0 featured-card" style="display:none;">
+                            <div class="position-relative">
+                                <img src="${review.image}" class="card-img-top" alt="${review.title}">
+                                <span class="position-absolute top-0 end-0 bg-primary text-white px-2 py-1 m-2 rounded small">Review</span>
+                            </div>
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">${item.name} <span class="badge bg-primary float-end">${item.price}</span></h5>
-                                <p class="card-text text-muted">${item.category}</p>
-                                <button class="btn btn-primary mt-auto w-100">Add to Cart</button>
+                                <h5 class="card-title text-center">
+                                    <a href="readingPage.html?id=${review.id}" class="text-decoration-none text-reset stretched-link">${review.title}</a>
+                                </h5>
+                                <div class="mb-2 text-center">${stars}</div>
+                                <p class="card-text text-muted small text-center">Check out our thoughts on this gadget.</p>
                             </div>
                         </div>
                     </div>
                 `;
-                $("#catalog-container").append(card);
+                $("#featured-container").append(card);
             });
+
+            // Add first 1 blog post
+            if (data.blog.length > 0) {
+                var post = data.blog[0];
+                var card = `
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card h-100 shadow-sm border-0 featured-card" style="display:none;">
+                            <div class="position-relative">
+                                <img src="${post.image}" class="card-img-top" alt="${post.title}">
+                                <span class="position-absolute top-0 end-0 bg-success text-white px-2 py-1 m-2 rounded small">Blog</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-center">
+                                    <a href="blog.html#blog-${post.id}" class="text-decoration-none text-reset stretched-link">${post.title}</a>
+                                </h5>
+                                <p class="card-text text-muted small text-center">${post.excerpt}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $("#featured-container").append(card);
+            }
+
             // jQuery Effect 1: Fade In Elements
-            $(".item-card").fadeIn(1000, function() {
-                // Scroll to hash if present after elements are loaded
-                // Only scroll once, after ALL elements have faded in (fadeIn callback runs for each element)
-                // We use a small timeout or check execution count, but simpler is to just check if not already scrolled
-                if (window.location.hash && !window.scrolledToHash) {
-                    var target = $(window.location.hash);
-                    if (target.length) {
-                        window.scrolledToHash = true;
-                        $('html, body').animate({
-                            scrollTop: target.offset().top - 100 // Adjust for navbar
-                        }, 1000);
-                        // Highlight effect
-                        target.find('.card').addClass('border-primary border-2');
-                    }
-                }
-            });
+            $(".featured-card").fadeIn(1000);
         }
 
         // 2. Populate Reviews on Reviews Page with Search & Sort
