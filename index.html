@@ -21,6 +21,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item dropdown">
@@ -38,41 +39,53 @@
         </div>
     </nav>
 
-    <!-- 2. Carousel with YouTube and Images -->
+    <!-- 2. Carousel with Featured Cards -->
     <section id="home" class="container-fluid px-0">
-        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="8000">
+        <div id="heroCarousel" class="carousel slide" data-bs-interval="false">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
             </div>
             <div class="carousel-inner">
+                <!-- Slide 1: Featured Review -->
                 <div class="carousel-item active">
-                    <div class="ratio ratio-16x9">
-                        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=0&controls=1&rel=0" title="YouTube video" allowfullscreen></iframe>
-                    </div>
-                    <div class="carousel-caption rounded p-3 d-none d-md-block">
-                        <h5>Featured Tech Review</h5>
-                        <p>Check out the latest gadgets and workstations.</p>
-                    </div>
+                    <a href="reviews.html#review-1" class="text-decoration-none text-light">
+                        <div class="ratio ratio-16x9">
+                            <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&q=80&w=1200&h=400" class="d-block w-100" style="object-fit: cover; filter: brightness(0.7);" alt="Dell Precision 5680">
+                        </div>
+                        <div class="carousel-caption rounded p-3 d-none d-md-block bg-dark bg-opacity-75">
+                            <h5>Featured Review: Dell Precision 5680</h5>
+                            <p>A mobile workstation powerhouse with incredible performance.</p>
+                            <span class="btn btn-primary btn-sm mt-2">Read Review</span>
+                        </div>
+                    </a>
                 </div>
+                <!-- Slide 2: Featured Blog -->
                 <div class="carousel-item">
-                    <div class="ratio ratio-16x9">
-                        <img src="https://images.unsplash.com/photo-1558494949-ef526b0042a0?auto=format&fit=crop&q=80&w=1200&h=400" class="d-block w-100" style="object-fit: cover;" alt="Server Rack">
-                    </div>
-                    <div class="carousel-caption rounded p-3 d-none d-md-block">
-                        <h5>Enterprise Storage</h5>
-                        <p>Reliable QNAP Rackmount Solutions.</p>
-                    </div>
+                    <a href="blog.html#blog-1" class="text-decoration-none text-light">
+                        <div class="ratio ratio-16x9">
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200&h=400" class="d-block w-100" style="object-fit: cover; filter: brightness(0.7);" alt="Future of AI">
+                        </div>
+                        <div class="carousel-caption rounded p-3 d-none d-md-block bg-dark bg-opacity-75">
+                            <h5>Featured Blog: The Future of AI in Tech</h5>
+                            <p>How artificial intelligence is reshaping the gadgets we use every day.</p>
+                            <span class="btn btn-primary btn-sm mt-2">Read Post</span>
+                        </div>
+                    </a>
                 </div>
+                <!-- Slide 3: Featured Catalog Item -->
                 <div class="carousel-item">
-                    <div class="ratio ratio-16x9">
-                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=80&w=1200&h=400" class="d-block w-100" style="object-fit: cover;" alt="DIY NAS">
-                    </div>
-                    <div class="carousel-caption rounded p-3 d-none d-md-block">
-                        <h5>Custom NAS Builds</h5>
-                        <p>Flexible storage with UNAS cases.</p>
-                    </div>
+                    <a href="#catalog-2" class="text-decoration-none text-light">
+                        <div class="ratio ratio-16x9">
+                            <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=1200&h=400" class="d-block w-100" style="object-fit: cover; filter: brightness(0.7);" alt="Keychron Q1 Pro">
+                        </div>
+                        <div class="carousel-caption rounded p-3 d-none d-md-block bg-dark bg-opacity-75">
+                            <h5>Featured Product: Keychron Q1 Pro</h5>
+                            <p>Premium mechanical keyboard for enthusiasts.</p>
+                            <span class="btn btn-primary btn-sm mt-2">View Catalog</span>
+                        </div>
+                    </a>
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">

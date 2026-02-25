@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Gadget Reviews - Reviews</title>
+    <title>Tech Gadget Reviews - Catalog</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,8 +20,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="reviews.html">Reviews</a></li>
-                    <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="catalog.html">Catalog</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item dropdown">
@@ -39,44 +39,45 @@
         </div>
     </nav>
 
-    <!-- Reviews Section -->
+    <!-- Catalog Section -->
     <section class="container py-5">
-        <h2 class="text-center mb-4">In-Depth Reviews</h2>
+        <h2 class="text-center mb-4">Product Catalog</h2>
         
         <!-- Search and Filter Controls -->
         <div class="row mb-4 justify-content-center">
             <div class="col-md-6 mb-2">
-                <input type="text" id="reviewSearch" class="form-control" placeholder="Search reviews...">
+                <input type="text" id="catalogSearch" class="form-control" placeholder="Search products...">
             </div>
             <div class="col-md-4 mb-2">
-                <select id="reviewSort" class="form-select">
+                <select id="catalogSort" class="form-select">
                     <option value="default">Sort by: Default</option>
-                    <option value="rating-high">Rating: High to Low</option>
-                    <option value="rating-low">Rating: Low to High</option>
-                    <option value="alpha-asc">Title: A-Z</option>
-                    <option value="alpha-desc">Title: Z-A</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name-asc">Name: A-Z</option>
+                    <option value="category">Category</option>
                 </select>
             </div>
         </div>
 
-        <div class="row g-4" id="reviews-container">
+        <div class="row g-4" id="full-catalog-container">
             <!-- Cards will be injected here by jQuery -->
         </div>
     </section>
 
-    <!-- Modal for Review Details -->
-    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+    <!-- Modal for Product Details (Optional, mimicking "Add to Cart" flow or just details) -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="reviewModalLabel">Review Details</h5>
+                    <h5 class="modal-title">Product Added</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="reviewModalBody">
-                    <!-- Content injected by jQuery -->
+                <div class="modal-body">
+                    <p><span id="modal-product-name" class="fw-bold"></span> has been added to your cart.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                    <button type="button" class="btn btn-primary">Checkout</button>
                 </div>
             </div>
         </div>

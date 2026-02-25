@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Gadget Reviews - Article</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg, #fff); /* Fallback or variable */
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        /* MSN/Article style tweaks */
+        .article-header {
+            border-bottom: 1px solid #dee2e6;
+            margin-bottom: 2rem;
+        }
+        
+        .article-meta {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-family: 'Georgia', serif; /* Article-like font */
+        }
+        
+        [data-theme="dark"] .article-container {
+            background: #2c3035;
+        }
+        
+        [data-theme="dark"] .article-content {
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-microchip me-2"></i>Devbranch</a>
+            <!-- Simple Nav for Article Page -->
+             <div class="ms-auto">
+                 <a href="reviews.html" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-1"></i> Back to Reviews</a>
+             </div>
+        </div>
+    </nav>
+
+    <!-- Article Section -->
+    <section class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div id="article-loading" class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+
+                <div id="article-content" class="article-container p-4 p-md-5 d-none bg-body rounded shadow-sm">
+                    <div class="article-header pb-4 text-center border-bottom mb-4">
+                        <h1 class="display-5 fw-bold mb-3" id="review-title">Title Placeholder</h1>
+                        <div class="article-meta mb-3 text-muted">
+                            <span id="review-rating" class="me-3 fs-5"></span>
+                            <span class="badge bg-secondary">Review</span>
+                        </div>
+                        <img src="" id="review-image" class="img-fluid rounded shadow w-100 mb-3" alt="Review Image" style="max-height: 400px; object-fit: cover;">
+                    </div>
+
+                    <div class="article-content fs-5 lh-lg" id="review-body" style="font-family: 'Times New Roman', Times, serif;">
+                        <!-- Content goes here -->
+                    </div>
+
+                    <div class="article-footer mt-5 pt-4 border-top d-flex justify-content-between align-items-center">
+                        <a href="reviews.html" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-1"></i> Back to Reviews List</a>
+                        <button class="btn btn-primary" onclick="window.print()"><i class="fas fa-print me-1"></i> Print Article</button>
+                    </div>
+                </div>
+                
+                <div id="article-error" class="text-center py-5 d-none">
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">Review Not Found</h4>
+                        <p>Sorry, we couldn't find the review you were looking for. It may have been removed or the link is incorrect.</p>
+                        <hr>
+                        <a href="reviews.html" class="btn btn-primary">Go Back to Reviews</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Inline script to handle specific article loading
+        $(document).ready(function() {
+            // Helper to get params
+            const urlParams = new URLSearchParams(window.location.search);
+            const reviewId = urlParams.get('id');
+
+            if (reviewId) {
+                $.getJSON("data.json", function(data) {
+                    const review = data.reviews.find(r => r.id == reviewId);
+                    
+                    if (review) {
+                        $("#review-title").text(review.title);
+                        $("#review-image").attr("src", review.image).attr("alt", review.title);
+                        
+                        // Formatting content nicely like an article
+                        // If content is just one block, we wrap it. If it has newlines, we normally split only if raw text.
+                        // Assuming simple text, we'll just put it in a p tag.
+                        // Add drop cap for the first letter for "MSN Article" feel
+                        var content = review.content;
+                        var firstLetter = content.charAt(0);
+                        var restOfContent = content.substring(1);
+                        
+                        $("#review-body").html(
+                            `<p><span class="float-start fs-1 lh-1 me-2 fw-bold text-primary">${firstLetter}</span>${restOfContent}</p>`
+                        );
+                        
+                        var stars = "";
+                        for(var i=0; i<review.rating; i++) { stars += '<i class="fas fa-star text-warning"></i>'; }
+                        for(var j=review.rating; j<5; j++) { stars += '<i class="far fa-star text-secondary"></i>'; } 
+                        $("#review-rating").html(stars);
+                        
+                        // Set document title
+                        document.title = review.title + " - Tech Gadget Reviews";
+
+                        $("#article-loading").addClass("d-none");
+                        $("#article-content").removeClass("d-none").hide().fadeIn();
+                    } else {
+                        $("#article-loading").addClass("d-none");
+                        $("#article-error").removeClass("d-none");
+                    }
+                });
+            } else {
+                 $("#article-loading").addClass("d-none");
+                 $("#article-error").removeClass("d-none");
+            }
+        });
+    </script>
+</body>
+</html>

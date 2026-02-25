@@ -21,6 +21,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
                     <li class="nav-item dropdown">
@@ -39,50 +40,22 @@
     </nav>
 
     <!-- Contact Section -->
-    <section class="container py-5">
-        <h2 class="text-center mb-4">Contact Us</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <form id="contactForm" novalidate>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="name" required data-bs-toggle="tooltip" data-bs-placement="top" title="Enter your full name">
-                                <div class="invalid-feedback">Please enter your name.</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" required data-bs-toggle="tooltip" data-bs-placement="top" title="Enter a valid email address">
-                                <div class="invalid-feedback">Please enter a valid email address.</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message" class="form-label">Message</label>
-                                <textarea class="form-control" id="message" rows="5" required data-bs-toggle="tooltip" data-bs-placement="top" title="Enter your message"></textarea>
-                                <div class="invalid-feedback">Please enter a message.</div>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
-                        </form>
-                        <div id="formSuccess" class="alert alert-success mt-3 d-none" role="alert">
-                            Your message has been sent successfully!
+    <section class="container py-5 text-center" style="min-height: 60vh; display: flex; align-items: center;">
+        <div class="w-100">
+            <h2 class="mb-5">Contact Us</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="card shadow border-0 h-100">
+                        <div class="card-body p-5">
+                            <i class="fas fa-paper-plane fa-4x mb-4 text-primary"></i>
+                            <h3 class="card-title fw-bold mb-4">Get In Touch</h3>
+                            <p class="lead mb-4">You can reach us directly at:</p>
+                            <a href="mailto:thedevbranch@gmail.com" class="btn btn-outline-primary btn-lg px-4 rounded-pill">
+                                <i class="fas fa-envelope me-2"></i> thedevbranch@gmail.com
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="row mt-5 text-center">
-            <div class="col-md-4 mb-3">
-                <i class="fas fa-map-marker-alt fa-2x mb-2" style="color: var(--primary-color);"></i>
-                <p>123 Tech Lane, Silicon Valley, CA</p>
-            </div>
-            <div class="col-md-4 mb-3">
-                <i class="fas fa-phone fa-2x mb-2" style="color: var(--primary-color);"></i>
-                <p>+1 (555) 123-4567</p>
-            </div>
-            <div class="col-md-4 mb-3">
-                <i class="fas fa-envelope fa-2x mb-2" style="color: var(--primary-color);"></i>
-                <p>contact@devbranch.com</p>
             </div>
         </div>
     </section>

@@ -23,7 +23,7 @@ $(document).ready(function() {
         if ($("#catalog-container").length) {
             $.each(data.catalog, function(index, item) {
                 var card = `
-                    <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="col-lg-4 col-md-6 col-sm-12" id="catalog-${item.id}">
                         <div class="card h-100 shadow-sm border-0 item-card" style="display:none;">
                             <img src="${item.image}" class="card-img-top" alt="${item.name}">
                             <div class="card-body d-flex flex-column">
@@ -37,49 +37,112 @@ $(document).ready(function() {
                 $("#catalog-container").append(card);
             });
             // jQuery Effect 1: Fade In Elements
-            $(".item-card").fadeIn(1000);
+            $(".item-card").fadeIn(1000, function() {
+                // Scroll to hash if present after elements are loaded
+                // Only scroll once, after ALL elements have faded in (fadeIn callback runs for each element)
+                // We use a small timeout or check execution count, but simpler is to just check if not already scrolled
+                if (window.location.hash && !window.scrolledToHash) {
+                    var target = $(window.location.hash);
+                    if (target.length) {
+                        window.scrolledToHash = true;
+                        $('html, body').animate({
+                            scrollTop: target.offset().top - 100 // Adjust for navbar
+                        }, 1000);
+                        // Highlight effect
+                        target.find('.card').addClass('border-primary border-2');
+                    }
+                }
+            });
         }
 
-        // 2. Populate Reviews on Reviews Page
+        // 2. Populate Reviews on Reviews Page with Search & Sort
         if ($("#reviews-container").length) {
-            $.each(data.reviews, function(index, review) {
-                var stars = "";
-                for(var i=0; i<review.rating; i++) { stars += '<i class="fas fa-star text-warning"></i>'; }
+            var allReviews = data.reviews;
+
+            function renderReviews(reviewsToRender) {
+                $("#reviews-container").empty();
                 
-                var card = `
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="card h-100 shadow-sm border-0 review-card" style="display:none;">
-                            <img src="${review.image}" class="card-img-top" alt="${review.title}">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">${review.title}</h5>
-                                <div class="mb-2">${stars}</div>
-                                <p class="card-text review-excerpt">${review.content.substring(0, 50)}...</p>
-                                <p class="card-text review-full" style="display:none;">${review.content}</p>
-                                <!-- jQuery Effect 2: Toggle Elements -->
-                                <button class="btn btn-sm btn-primary toggle-review mt-auto">Read More</button>
-                                <button class="btn btn-sm btn-outline-primary mt-2 view-modal-btn" data-bs-toggle="modal" data-bs-target="#reviewModal" data-title="${review.title}" data-content="${review.content}">View in Modal</button>
+                if (reviewsToRender.length === 0) {
+                     $("#reviews-container").append('<div class="col-12 text-center"><p class="text-muted">No reviews found matching your criteria.</p></div>');
+                     return;
+                }
+
+                $.each(reviewsToRender, function(index, review) {
+                    var stars = "";
+                    for(var i=0; i<review.rating; i++) { stars += '<i class="fas fa-star text-warning"></i>'; }
+                    
+                    var card = `
+                        <div class="col-lg-4 col-md-6 col-sm-12" id="review-${review.id}">
+                            <div class="card h-100 shadow-sm border-0 review-card" style="display:none;">
+                                <img src="${review.image}" class="card-img-top" alt="${review.title}">
+                                <div class="card-body d-flex flex-column text-center">
+                                    <h5 class="card-title">
+                                        <a href="javascript:void(0)" class="text-decoration-none text-reset open-review-btn" data-id="${review.id}">${review.title}</a>
+                                    </h5>
+                                    <div class="mb-3">${stars}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
-                $("#reviews-container").append(card);
-            });
-            $(".review-card").fadeIn(1000);
+                    `;
+                    $("#reviews-container").append(card);
+                });
+                
+                $(".review-card").fadeIn(500);
+            }
 
-            // Toggle Review Text
-            $(".toggle-review").click(function() {
-                var cardBody = $(this).closest(".card-body");
-                cardBody.find(".review-excerpt").toggle();
-                cardBody.find(".review-full").slideToggle();
-                $(this).text($(this).text() == "Read More" ? "Read Less" : "Read More");
-            });
+            function filterAndSortReviews() {
+                var searchText = $("#reviewSearch").val().toLowerCase();
+                var sortOption = $("#reviewSort").val();
+                
+                // Filter
+                var filtered = allReviews.filter(function(review) {
+                    return review.title.toLowerCase().includes(searchText) || 
+                           (review.content && review.content.toLowerCase().includes(searchText));
+                });
+                
+                // Sort
+                filtered.sort(function(a, b) {
+                    if (sortOption === 'rating-high') {
+                        return b.rating - a.rating; // High to Low
+                    } else if (sortOption === 'rating-low') {
+                        return a.rating - b.rating; // Low to High
+                    } else if (sortOption === 'alpha-asc') {
+                        return a.title.localeCompare(b.title); // A-Z
+                    } else if (sortOption === 'alpha-desc') {
+                        return b.title.localeCompare(a.title); // Z-A
+                    } else {
+                        return a.id - b.id; // Default (by ID)
+                    }
+                });
+                
+                renderReviews(filtered);
+            }
 
-            // Populate Modal
-            $(".view-modal-btn").click(function() {
-                var title = $(this).data("title");
-                var content = $(this).data("content");
-                $("#reviewModalLabel").text(title);
-                $("#reviewModalBody").html("<p>" + content + "</p>");
+            // Initial Render
+            renderReviews(allReviews);
+            
+            // Check for Hash Scrolling after initial render
+            setTimeout(function() {
+                 if (window.location.hash && !window.scrolledToReview) {
+                    var target = $(window.location.hash);
+                    if (target.length) {
+                        window.scrolledToReview = true;
+                        $('html, body').animate({
+                            scrollTop: target.offset().top - 100
+                        }, 1000);
+                        target.find('.card').addClass('border-primary border-2');
+                    }
+                }
+            }, 600);
+
+            // Event Listeners
+            $("#reviewSearch").on("keyup", filterAndSortReviews);
+            $("#reviewSort").on("change", filterAndSortReviews);
+
+            // Handle "Read Review" Click -> Navigate to Article Page
+            $("#reviews-container").on("click", ".open-review-btn", function() {
+                var id = $(this).data("id");
+                window.location.href = "readingPage.html?id=" + id;
             });
         }
 
@@ -90,7 +153,7 @@ $(document).ready(function() {
                 var isCollapsed = index === 0 ? "" : "collapsed";
                 
                 var accordionItem = `
-                    <div class="accordion-item border-0 mb-2 shadow-sm">
+                    <div class="accordion-item border-0 mb-2 shadow-sm" id="blog-${post.id}">
                         <h2 class="accordion-header" id="heading${post.id}">
                             <button class="accordion-button ${isCollapsed}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${post.id}" aria-expanded="true" aria-controls="collapse${post.id}">
                                 ${post.title} - <small class="text-muted ms-2">${post.date}</small>
@@ -122,7 +185,113 @@ $(document).ready(function() {
                 blogBody.find(".blog-full").slideToggle();
                 $(this).text($(this).text() == "Read Full Post" ? "Read Less" : "Read Full Post");
             });
+
+            // Handle Hash Linking for Blog
+            if (window.location.hash) {
+                var hash = window.location.hash; // e.g., #blog-1
+                if (hash.startsWith("#blog-")) {
+                    var blogId = hash.replace("#blog-", "");
+                    var targetCollapse = $("#collapse" + blogId);
+                    
+                    if (targetCollapse.length && $(hash).length) {
+                        // Scroll to the item
+                        $('html, body').animate({
+                            scrollTop: $(hash).offset().top - 100
+                        }, 1000);
+                        
+                        // Open the accordion if closed
+                        // Use getOrCreateInstance to avoid errors if already initialized
+                        var bsCollapse = bootstrap.Collapse.getOrCreateInstance(targetCollapse[0], {
+                            toggle: false
+                        });
+                        bsCollapse.show();
+                        
+                        // Highlight
+                        $(hash).addClass("border border-primary");
+                    }
+                }
+            }
         }
+
+        // 4. Populate Full Catalog on Catalog Page with Search & Sort
+        if ($("#full-catalog-container").length) {
+            var allProducts = data.catalog;
+
+            function renderCatalog(productsToRender) {
+                $("#full-catalog-container").empty();
+                
+                if (productsToRender.length === 0) {
+                     $("#full-catalog-container").append('<div class="col-12 text-center"><p class="text-muted">No products found matching your criteria.</p></div>');
+                     return;
+                }
+
+                $.each(productsToRender, function(index, item) {
+                    var card = `
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="card h-100 shadow-sm border-0 catalog-card" style="display:none;">
+                                <img src="${item.image}" class="card-img-top" alt="${item.name}">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">${item.name} <span class="badge bg-primary float-end">${item.price}</span></h5>
+                                    <p class="card-text text-muted">${item.category}</p>
+                                    <button class="btn btn-primary mt-auto w-100 add-to-cart-btn" data-name="${item.name}">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    $("#full-catalog-container").append(card);
+                });
+                
+                $(".catalog-card").fadeIn(500);
+            }
+
+            function filterAndSortCatalog() {
+                var searchText = $("#catalogSearch").val().toLowerCase();
+                var sortOption = $("#catalogSort").val();
+                
+                // Filter
+                var filtered = allProducts.filter(function(item) {
+                    return item.name.toLowerCase().includes(searchText) || 
+                           item.category.toLowerCase().includes(searchText);
+                });
+                
+                // Sort
+                filtered.sort(function(a, b) {
+                    // Helper to parse price string "$99.99" -> 99.99
+                    var priceA = parseFloat(a.price.replace(/[^0-9.-]+/g,""));
+                    var priceB = parseFloat(b.price.replace(/[^0-9.-]+/g,""));
+
+                    if (sortOption === 'price-low') {
+                        return priceA - priceB;
+                    } else if (sortOption === 'price-high') {
+                        return priceB - priceA;
+                    } else if (sortOption === 'name-asc') {
+                        return a.name.localeCompare(b.name);
+                    } else if (sortOption === 'category') {
+                        return a.category.localeCompare(b.category);
+                    } else {
+                        return a.id - b.id; // Default
+                    }
+                });
+                
+                renderCatalog(filtered);
+            }
+
+            // Initial Render
+            renderCatalog(allProducts);
+
+            // Event Listeners
+            $("#catalogSearch").on("keyup", filterAndSortCatalog);
+            $("#catalogSort").on("change", filterAndSortCatalog);
+
+            // Handle "Add to Cart" Click using delegation
+            $("#full-catalog-container").on("click", ".add-to-cart-btn", function() {
+                var name = $(this).data("name");
+                $("#modal-product-name").text(name);
+                var myModal = new bootstrap.Modal(document.getElementById('productModal'));
+                myModal.show();
+            });
+        }
+
     });
 
     // jQuery Effect 3: Form Validation
@@ -154,15 +323,26 @@ $(document).ready(function() {
         });
     }
 
-    // Carousel Swipe Support (Mouse & Touch)
+    // Carousel Swipe Support (Mouse, Touch & Touchpad)
     var carousel = $("#heroCarousel");
     if (carousel.length) {
         var startX = 0;
         var endX = 0;
         var isDragging = false;
-        var bsCarousel = new bootstrap.Carousel(carousel[0]);
+        var bsCarousel = bootstrap.Carousel.getOrCreateInstance(carousel[0]);
 
+        // Prevent default image dragging to allow mouse swipe
+        carousel.find("img").on("dragstart", function(e) {
+            e.preventDefault();
+        });
+
+        // Touch & Mouse Events
         carousel.on("touchstart mousedown", function(e) {
+            // Check if we are clicking a button/control, if so let it pass
+            if ($(e.target).closest('.carousel-control-prev, .carousel-control-next, .carousel-indicators').length) {
+                return;
+            }
+            
             isDragging = true;
             startX = e.type === "touchstart" ? e.originalEvent.touches[0].clientX : e.clientX;
             endX = startX; // Reset endX on start
@@ -177,7 +357,7 @@ $(document).ready(function() {
             if (!isDragging) return;
             isDragging = false;
             
-            var threshold = 50; // Minimum distance to trigger swipe
+            var threshold = 50; 
             if (startX - endX > threshold) {
                 // Swiped left
                 bsCarousel.next();
@@ -185,6 +365,44 @@ $(document).ready(function() {
                 // Swiped right
                 bsCarousel.prev();
             }
+
+            // Prevent link clicks if user was dragging
+            if (Math.abs(startX - endX) > threshold) {
+                // This listener needs to run in the capture phase or prevent current click sequence
+                carousel.find('a').one('click', function(clickEvent) {
+                    clickEvent.preventDefault();
+                    clickEvent.stopPropagation();
+                });
+            }
         });
+
+        // Touchpad Horizontal Scroll (Wheel) Support
+        carousel.on("wheel", function(e) {
+            // Check for horizontal scroll
+            if (Math.abs(e.originalEvent.deltaX) > Math.abs(e.originalEvent.deltaY)) {
+                
+                // If horizontal scroll is detected, prevent page navigation/scroll if desired,
+                // but usually user just wants the carousel to move, not the page to go back 
+                // e.preventDefault(); // Might trigger passive listener error
+                
+                // Debounce/Throttle usage to prevent rapid switching
+                if (carousel.data('isScrolling')) return;
+                
+                if (e.originalEvent.deltaX > 20) {
+                    bsCarousel.next();
+                    setScrollLock();
+                } else if (e.originalEvent.deltaX < -20) {
+                    bsCarousel.prev();
+                    setScrollLock();
+                }
+            }
+        });
+
+        function setScrollLock() {
+            carousel.data('isScrolling', true);
+            setTimeout(function() {
+                carousel.data('isScrolling', false);
+            }, 1000); // 1-second timeout
+        }
     }
 });
